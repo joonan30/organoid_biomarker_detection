@@ -2,15 +2,15 @@
 import pandas as pd
 from collections import defaultdict
 import time, os, csv
-execfile('pathway_utilities.py', globals())
-
+# execfile('pathway_utilities.py', globals())
+exec(open("./pathway_utilities.py").read(), globals() )
 
 def parse_Drugbank_Drug_Target_relationship():
     """
     Drug-target relationship provided by Drugbank
 	output = { drug : [ list of targets in gene ID ] }
     """
-    print 'all drug-drug targets (including candidate drug targets) from Drugbank data are imported'
+    print ('all drug-drug targets (including candidate drug targets) from Drugbank data are imported')
 
     output = defaultdict(list) # { drug : [ list of targets ] }
     gene2uniprot, uniprot2gene = geneID2uniprot(), uniprot2geneID()

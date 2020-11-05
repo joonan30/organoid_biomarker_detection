@@ -3,8 +3,11 @@ import scipy.stats as stat
 import numpy as np
 from collections import defaultdict
 import pandas as pd
-execfile('pathway_utilities.py', globals())
-execfile('parse_Drugbank.py', globals())
+# execfile('pathway_utilities.py', globals())
+# execfile('parse_Drugbank.py', globals())
+exec(open("./pathway_utilities.py").read(), globals() )
+exec(open("./parse_Drugbank.py").read(), globals() )
+
 gene2uniprot, uniprot2gene = geneID2uniprot(), uniprot2geneID()
 common_dbID, dbID_commonSyn, commonSyn_dbID, common_Syn, Syn_common = parse_Drugbank_drugbankID_synonyms()
 

@@ -5,7 +5,8 @@ import gzip
 import os, time, json
 import scipy.stats as stat
 import numpy as np
-execfile('pathway_utilities.py', globals())
+# execfile('pathway_utilities.py', globals())
+exec(open("pathway_utilities.py").read(), globals() )
 ensg2gene, gene2uniprot, uniprot2gene = ensembl2geneID(), geneID2uniprot(), uniprot2geneID()
 
 # expression

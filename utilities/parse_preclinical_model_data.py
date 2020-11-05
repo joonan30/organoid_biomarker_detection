@@ -4,8 +4,12 @@ import scipy.stats as stat
 import numpy as np
 from collections import defaultdict
 import pandas as pd
-execfile('pathway_utilities.py', globals())
-execfile('parse_Drugbank.py', globals())
+# execfile('pathway_utilities.py', globals())
+# execfile('parse_Drugbank.py', globals())
+
+exec(open("./pathway_utilities.py").read(), globals() )
+exec(open("./parse_Drugbank.py").read(), globals() )
+
 gene2uniprot, uniprot2gene = geneID2uniprot(), uniprot2geneID()
 _, _, _, common_syn, syn_common = parse_Drugbank_drugbankID_synonyms()
 
@@ -70,8 +74,9 @@ def parse_coad_organoid_transcriptome():
 	output2 = { sample : { uniprot : exp } }
 	'''
 	current_dir = os.getcwd()
-	os.chdir('/home/junghokong/PROJECT/colon_cancer/code/1_drugResponsePrediction')
-	execfile('parse_COAD_organoid_data.py', globals())
+	# os.chdir('/home/junghokong/PROJECT/colon_cancer/code/1_drugResponsePrediction')
+	# execfile('parse_COAD_organoid_data.py', globals())
+	exec(open("parse_COAD_organoid_data.py").read(), globals() )
 	output, output2 = return_COAD_2015_cell_organoid_RMA_normalized_expression()
 	os.chdir(current_dir)
 	return output, output2
@@ -87,8 +92,9 @@ def parse_coad_organoid_drug_response( response_unit ):
 	median IC50 values from di/triplicates are returned
 	'''
 	current_dir = os.getcwd()
-	os.chdir('/home/junghokong/PROJECT/colon_cancer/code/1_drugResponsePrediction')
-	execfile('parse_COAD_organoid_data.py', globals())
+	# os.chdir('/home/junghokong/PROJECT/colon_cancer/code/1_drugResponsePrediction')
+	# execfile('parse_COAD_organoid_data.py', globals())
+	exec(open("parse_COAD_organoid_data.py").read(), globals() )
 	if response_unit == 'IC50':
 		output, drugList = return_COAD_organoid_drug_response_IC50()
 	os.chdir(current_dir)

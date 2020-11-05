@@ -11,7 +11,7 @@ def reactome_genes(): # provide in a dictionary
     output = defaultdict(list)
     output_list = []
     f = open('../data/msigdb.v6.1.symbols.gmt.txt','r')
-    for line in f.xreadlines():
+    for line in f.readlines():
         line = line.strip().split('\t')
         if 'REACTOME' in line[0]:
             reactome = line[0]
@@ -56,7 +56,7 @@ def convert_uniprotList_to_geneList( input_uniprotList ):
 # ensembl gene annotation
 def annotation():
     geneID2ensembl, ensembl2geneID = defaultdict(set), {}
-    df = pd.read_csv('../data/2017_07_31_biomart_protein_coding_genes.txt', sep='\t')
+    df = pd.read_csv('../data/ENSG_GENESYMBOL.txt', sep='\t')
     for i in range(len(df)):
         geneID, ensembl = df['Gene name'][i], df['Gene stable ID'][i]
         geneID2ensembl[ geneID ].add( ensembl )
@@ -68,7 +68,7 @@ def annotation():
 
 def ensembl2geneID():
     output = {} # { ensembl : geneID }
-    df = pd.read_csv('../data/2017_07_31_biomart_protein_coding_genes.txt', sep='\t')
+    df = pd.read_csv('../data/ENSG_GENESYMBOL.txt', sep='\t')
     for i in range(len(df)):
         ensembl, gene = df['Gene stable ID'][i], df['Gene name'][i]
         output[ensembl] = gene
@@ -76,7 +76,7 @@ def ensembl2geneID():
 
 def geneID2uniprot():
     output = {} # { gene ID : uniprot ID }
-    df = pd.read_csv('../data/uniprot_homoSapiens_multipleGeneName_20180802.tab', sep='\t')
+    df = pd.read_csv('../data/UNIPROT_GENESYMBOL.tab', sep='\t')
     for i in range(len(df)):
         uniprot, geneList = df['Entry'][i], df['Gene names'][i]
         if pd.isnull(geneList) == False:
@@ -87,7 +87,7 @@ def geneID2uniprot():
 
 def uniprot2geneID():
     output = {} # { uniprot ID : gene ID }
-    df = pd.read_csv('../data/uniprot_homoSapiens_multipleGeneName_20180802.tab', sep='\t')
+    df = pd.read_csv('../data/UNIPROT_GENESYMBOL.tab', sep='\t')
     for i in range(len(df)):
         uniprot, geneList = df['Entry'][i], df['Gene names'][i]
         if pd.isnull(geneList) == False:
